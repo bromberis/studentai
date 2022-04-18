@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
 import swal from "sweetalert";
 import { Link } from "react-router-dom";
 import * as moment from "moment";
 
 function Search() {
   const [searchParams, setSearchParams] = useState("");
-
-  // pasidaryti fetch ir use state naują
   const [studentsData, setStudentsData] = useState({});
-  // const [isLoading, setIsLoading] = useState(false);
 
   const fetchData = async () => {
     await fetch("http://localhost:3005/api/v1/students/")
@@ -68,7 +64,7 @@ function Search() {
                     <td className="align-middle">{student.name}</td>
                     <td className="align-middle">{student.surname}</td>
                     <td className="align-middle">
-                      {moment(student.birthdate).format("YYYY-MM-DD")}
+                      {moment(student.birthdate).format("yyyy-mm-dd")}
                     </td>
                     <td className="align-middle">{student.city}</td>
                     <td className="align-middle">{student.program}</td>

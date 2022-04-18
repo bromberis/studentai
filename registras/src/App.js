@@ -93,25 +93,25 @@ function App() {
   // DELETE STUDENT
 
   const deleteStudent = async (id) => {
-    console.log(id);
-    // swal({
-    //   title: "Are you sure?",
-    //   text: "It will permanently deleted !",
-    //   type: "warning",
-    //   showCancelButton: true,
-    //   confirmButtonColor: "#3085d6",
-    //   cancelButtonColor: "#d33",
-    //   confirmButtonText: "Yes, delete it!",
-    // }).then(function () {
-    //   swal("Deleted!", "Your file has been deleted.", "success");
-    // });
+    swal({
+      title: "Ar tikrai norite ištrinti?",
+      icon: "warning",
+      buttons: ["Atšaukti", "Gerai"],
+    }).then((isConfirm) => {
+      if (isConfirm) {
+        fetch("http://localhost:3005/api/v1/students/" + id, {
+          method: "DELETE",
+        }).then(() => console.log("success"));
 
-    await fetch("http://localhost:3005/api/v1/students/" + id, {
-      method: "DELETE",
+        setStudents(students.filter((student) => student.id !== id));
+
+        swal("Ištrinta!", "", "success");
+
+        fetchData();
+      } else {
+        swal.close();
+      }
     });
-
-    setStudents(students.filter((student) => student.id !== id));
-    fetchData();
   };
 
   return (

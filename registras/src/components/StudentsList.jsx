@@ -3,6 +3,16 @@ import * as moment from "moment";
 import { Link } from "react-router-dom";
 import "./StudentList.css";
 
+let firstLettersToUppercase = (str) => {
+  const words = str.split(" ");
+
+  for (let i = 0; i < words.length; i++) {
+    words[i] = words[i][0].toUpperCase() + words[i].slice(1);
+  }
+
+  return words.join(" ");
+};
+
 function StudentsList(props) {
   return (
     <>
@@ -33,15 +43,20 @@ function StudentsList(props) {
             {props.students.length > 0 ? (
               props.students.map((student) => (
                 <tr key={student._id}>
-                  <td className="align-middle">{student.name}</td>
-                  <td className="align-middle">{student.surname}</td>
+                  <td className="align-middle">
+                    {firstLettersToUppercase(student.name)}
+                  </td>
+                  <td className="align-middle">
+                    {firstLettersToUppercase(student.surname)}
+                  </td>
 
                   <td className="align-middle">
                     {moment(student.birthdate).format("YYYY-MM-DD")}
-                    {/* {student.birthdate} */}
                   </td>
 
-                  <td className="align-middle">{student.city}</td>
+                  <td className="align-middle">
+                    {firstLettersToUppercase(student.city)}
+                  </td>
                   <td className="align-middle">{student.program}</td>
                   <td className="align-middle">{student.group}</td>
                   <td>

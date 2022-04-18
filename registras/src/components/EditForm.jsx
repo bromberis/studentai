@@ -3,14 +3,14 @@ import { useForm } from "react-hook-form";
 import groupsData from "../data/groups.json";
 import studiesData from "../data/program.json";
 import { Link } from "react-router-dom";
+// import swal from "sweetalert";
 
 function EditForm(props) {
   const {
     register,
-    handleSubmit,
-    // reset,
     formState: { errors },
   } = useForm();
+
   const [student, setStudent] = useState(props.currentStudent);
 
   useEffect(() => {
@@ -18,10 +18,7 @@ function EditForm(props) {
   }, [props]);
 
   const handleInputChange = (event) => {
-    const { name, value } = event.target;
-
-    console.log(name);
-
+    let { name, value } = event.target;
     setStudent({ ...student, [name]: value });
   };
 
@@ -179,14 +176,14 @@ function EditForm(props) {
                 </select>
                 <label htmlFor="group">Grupė:</label>
               </div>
-              <Link to="/students">
-                <button
-                  type="submit"
-                  className="btn btn-outline-warning my-3 me-2"
-                >
-                  Atnaujinti
-                </button>
-              </Link>
+
+              <button
+                type="submit"
+                className="btn btn-outline-warning my-3 me-2"
+              >
+                Atnaujinti
+              </button>
+
               <Link to="/students">
                 <button
                   type="button"
